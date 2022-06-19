@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <h:body>
+        <h:form>
+            <h:commandButton action="/index" value="Home" />
+        </h:form>
+        <hr/>          
+        <h:form>
+            <h:outputText value="User Email">
+            </h:outputText>
+            <h:inputText value="#{usersBean.entity.email}" >
+
+            </h:inputText><br/>
+            <h:outputText value="User Password">
+
+            </h:outputText>
+            <h:inputText value="#{usersBean.entity.pass}" >
+
+            </h:inputText><br/>
+
+            <h:commandButton rendered="#{usersBean.entity.user_id==NULL}" action="#{usersBean.create}" value="Create" />
+            <h:commandButton rendered="#{usersBean.entity.user_id!=NULL}" action="#{usersBean.update}" value="Update" />
+            <h:commandButton rendered="#{usersBean.entity.user_id!=NULL}" action="#{usersBean.delete}" value="Delete" />
+            <h:commandButton rendered="#{usersBean.entity.user_id!=NULL}" action="#{usersBean.clearForm}" value="ClearForm" />
+            
+            <h:messages>
+
+            </h:messages>
+        </h:form>
+        <h:form>
+            Page #{usersBean.page} of #{usersBean.pageCount}
+            <h:commandButton action="#{usersBean.previus}" value="previus"/>
+            <h:commandButton action="#{usersBean.next}" value="next"/>
+            
+            <h:dataTable value="#{usersBean.list}" var="u">
+                <h:column>
+                    <f:facet name="header">User ID</f:facet>
+                        #{u.user_id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Email</f:facet>
+                    <h:commandLink action="#{usersBean.setEntity(u)}" value="#{u.email}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Number</f:facet>
+                        #{u.pass}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kelime Ekleme Sayısı</f:facet>
+                        #{u.kelime_ekleme_sayisi}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

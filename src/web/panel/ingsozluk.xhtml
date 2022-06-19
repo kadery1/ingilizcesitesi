@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <body>
+        <h:form>
+            <h:commandButton action="/index" value="Home" />
+        </h:form>
+        <hr/>          
+        <h:form>
+            <h:outputText value="İngilizce Kelime">
+            </h:outputText>
+            <h:inputText value="#{ingSozlukBean.entity.kelime}" >
+
+            </h:inputText><br/>
+            <h:outputText value="İngilizce Anlam">
+
+            </h:outputText>
+            <h:inputText value="#{ingSozlukBean.entity.anlam}" >
+
+            </h:inputText><br/>
+
+            <h:commandButton rendered="#{ingSozlukBean.entity.ing_id==NULL}" action="#{ingSozlukBean.create}" value="Create" />
+            <h:commandButton rendered="#{ingSozlukBean.entity.ing_id!=NULL}" action="#{ingSozlukBean.update}" value="Update" />
+            <h:commandButton rendered="#{ingSozlukBean.entity.ing_id!=NULL}" action="#{ingSozlukBean.delete}" value="Delete" />
+            <h:commandButton rendered="#{ingSozlukBean.entity.ing_id!=NULL}" action="#{ingSozlukBean.clearForm}" value="ClearForm" />
+            
+            <h:messages>
+
+            </h:messages>
+        </h:form>
+        <h:form>
+            <h:dataTable value="#{ingSozlukBean.list}" var="u">
+                <h:column>
+                    <f:facet name="header">Kelime ID</f:facet>
+                        #{u.ing_id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">İngilizce Kelime</f:facet>
+                    <h:commandLink action="#{ingSozlukBean.setEntity(u)}" value="#{u.kelime}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">İngilizce Anlam</f:facet>
+                        #{u.anlam}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </body>
+</html>
+

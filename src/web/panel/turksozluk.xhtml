@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <body>
+        <h:form>
+            <h:commandButton action="/index" value="Home" />
+        </h:form>
+        <hr/>          
+        <h:form>
+            <h:outputText value="Türkçe Kelime">
+            </h:outputText>
+            <h:inputText value="#{turkSozlukBean.entity.kelime}" >
+
+            </h:inputText><br/>
+            <h:outputText value="Türkçe Anlam">
+
+            </h:outputText>
+            <h:inputText value="#{turkSozlukBean.entity.anlam}" >
+
+            </h:inputText><br/>
+
+            <h:commandButton rendered="#{turkSozlukBean.entity.turk_id==NULL}" action="#{turkSozlukBean.create}" value="Create" />
+            <h:commandButton rendered="#{turkSozlukBean.entity.turk_id!=NULL}" action="#{turkSozlukBean.update}" value="Update" />
+            <h:commandButton rendered="#{turkSozlukBean.entity.turk_id!=NULL}" action="#{turkSozlukBean.delete}" value="Delete" />
+            <h:commandButton rendered="#{turkSozlukBean.entity.turk_id!=NULL}" action="#{turkSozlukBean.clearForm}" value="ClearForm" />
+            
+            <h:messages>
+
+            </h:messages>
+        </h:form>
+        <h:form>
+            <h:dataTable value="#{turkSozlukBean.list}" var="u">
+                <h:column>
+                    <f:facet name="header">Kelime ID</f:facet>
+                        #{u.turk_id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Türkçe Kelime</f:facet>
+                    <h:commandLink action="#{turkSozlukBean.setEntity(u)}" value="#{u.kelime}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Türkçe Anlam</f:facet>
+                        #{u.anlam}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </body>
+</html>
+
